@@ -1,0 +1,27 @@
+{
+  "name": "academic-website-nothing-os",
+  "version": "1.0.0",
+  "description": "Nothing OS inspired academic website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss src/styles/main.css -o public/dist/main.css",
+    "build:js": "esbuild src/js/main.js --bundle --minify --outfile=public/dist/main.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "autoprefixer": "^10.4.16",
+    "esbuild": "^0.19.8"
+  }
+}
