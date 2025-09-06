@@ -294,11 +294,12 @@
         }
 
         .hero-content {
-            max-width: 600px;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(1.8rem, 4.5vw, 4rem); /* Responsive font size that scales better */
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: var(--space-lg);
@@ -307,6 +308,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -1px;
+
+            /* Keep on one line */
+            white-space: nowrap;
+            display: block;
+            width: 100%;
         }
 
         .hero-subtitle {
@@ -952,55 +958,28 @@
             padding-top: var(--space-lg); /* Reduce since we have main padding */
         }
 
-        /* ===== MOBILE RESPONSIVE FIXES ===== */
+        /* Mobile adjustments for better fitting */
         @media (max-width: 768px) {
-            .main-content {
-                padding-top: 70px;
-            }
-
-            .navbar {
-                height: 70px;
-                padding: var(--space-md) var(--space-lg);
-            }
-
-            .hero {
-                min-height: calc(100vh - 70px);
-                padding: var(--space-lg) var(--space-lg) var(--space-2xl);
-            }
-
-            .section {
-                padding: var(--space-2xl) var(--space-lg);
-                min-height: calc(100vh - 70px);
-            }
-
-            /* Stack contact grid on mobile */
-            .contact-grid {
-                grid-template-columns: 1fr !important;
-                gap: var(--space-2xl) !important;
-            }
-
-            /* Stack hero grid on mobile */
-            .hero-container {
-                grid-template-columns: 1fr !important;
-                text-align: center;
-            }
-
-            /* Stack about grid on mobile */
-            .about-grid {
-                grid-template-columns: 1fr !important;
-            }
-
-            /* Adjust navigation menu for mobile */
-            .nav-menu {
-                gap: var(--space-lg);
-            }
-
-            .nav-link {
-                font-size: 14px;
-                padding: var(--space-xs) var(--space-sm);
+            .hero-title {
+                font-size: clamp(1.4rem, 5.5vw, 2.8rem);
+                letter-spacing: -0.5px;
             }
         }
 
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: clamp(1.1rem, 6vw, 2.2rem);
+                letter-spacing: -0.3px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: clamp(0.9rem, 7vw, 1.8rem);
+                letter-spacing: 0;
+            }
+        }
         /* ===== PERFORMANCE AND VISUAL IMPROVEMENTS ===== */
         .card {
             transition: var(--transition);
@@ -1080,7 +1059,7 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-brand">Dr. S.I. Singh</a>
+<!--            <a href="#home" class="nav-brand">Dr. S.I. Singh</a>-->
 
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
@@ -1105,7 +1084,9 @@
             <div class="hero">
                 <div class="hero-container">
                     <div class="hero-content">
-                        <h1 class="hero-title">Dr. Sarangthem Ibotombi Singh</h1>
+                        <div class="hero-title-container">
+                            <h1 class="hero-title">Dr. Sarangthem Ibotombi Singh</h1>
+                        </div>
                         <p class="hero-subtitle">Assistant Professor</p>
                         <p class="hero-description">
                             Department of Computer Science & Engineering at Tezpur University.
