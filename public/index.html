@@ -935,6 +935,110 @@
         .copy-button.copied {
             background: var(--color-success);
         }
+
+        /* ===== HAMBURGER MENU (MOBILE) ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: none;
+            border: none;
+            z-index: calc(var(--z-sticky) + 1);
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-primary);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== IMPROVED MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            /* Show hamburger on mobile */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Hide default nav menu, show on toggle */
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: var(--bg-primary);
+                flex-direction: column;
+                padding: var(--space-2xl);
+                gap: var(--space-lg);
+                transition: left 0.3s ease;
+                z-index: var(--z-dropdown);
+                border-top: 1px solid var(--bg-tertiary);
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: var(--space-md);
+                font-size: 18px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            /* Better touch targets */
+            .btn {
+                min-height: 48px;
+            }
+
+            /* Modal improvements */
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+                padding: var(--space-lg);
+            }
+
+            /* Footer mobile */
+            footer > div > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+                text-align: center;
+            }
+
+            /* Contact grid */
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Stack publication buttons */
+            .card [style*="display: flex; gap: 16px"] {
+                flex-direction: column !important;
+            }
+
+            .card [style*="display: flex; gap: 16px"] button {
+                width: 100% !important;
+            }
+        }
     </style>
 </head>
 
@@ -950,7 +1054,14 @@
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <ul class="nav-menu">
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#teaching" class="nav-link" data-page="teaching">Teaching</a></li>
                 <li><a href="#research" class="nav-link" data-page="research">Research</a></li>
