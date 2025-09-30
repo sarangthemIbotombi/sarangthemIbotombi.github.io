@@ -484,7 +484,7 @@ class NothingOSAcademicSite {
             {
                 name: "Prasiddha Sarma",
                 initials: "PS",
-                image: "/assets/images/students/Prasiddha.png",
+                image: "./assets/images/students/Prasiddha.png",
                 degree: "Ph.D. in Computer Science & Engineering",
                 thesis: "Recognition and Grading of Yoga Postures using Deep Learning Approaches",
                 period: "2020-Present",
@@ -493,7 +493,7 @@ class NothingOSAcademicSite {
             {
                 name: "Md Basit Azam",
                 initials: "MBA",
-                image: "/assets/images/students/basit.jpg",
+                image: "./assets/images/students/basit.jpg",
                 degree: "Ph.D. in Computer Science & Engineering",
                 thesis: "AI-Enhanced ECG Diagnostics for Precision Non-Invasive Detection of Diabetic Glycemic Episodes",
                 period: "2024-Present",
