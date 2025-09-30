@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dr. Sarangthem Ibotombi Singh - Assistant Professor, Computer Science & Engineering, Tezpur University">
+    <title>Dr. Sarangthem Ibotombi Singh, Department of Computer Science and Engineering, Tezpur University</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/sis.jpg">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/sis.jpg">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Nothing OS inspired fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== NOTHING OS DESIGN SYSTEM ===== */
+        :root {
+            /* Nothing OS Color Palette */
+            --color-primary: #000000;
+            --color-secondary: #666666;
+            --color-tertiary: #999999;
+            --color-accent: #FF6B35;
+            --color-success: #00D4AA;
+            --color-warning: #FFB800;
+            --color-error: #FF5757;
+
+            /* Z-INDEX VARIABLES */
+            --z-background: -1;
+            --z-content: 1;
+            --z-elevated: 10;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-modal: 1000;
+            --z-notification: 2000;
+            --z-tooltip: 3000;
+
+            /* Nothing OS Backgrounds */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8F8F8;
+            --bg-tertiary: #F0F0F0;
+            --bg-overlay: rgba(255, 255, 255, 0.8);
+            --bg-glass: rgba(255, 255, 255, 0.1);
+
+            /* Dark mode */
+            --bg-primary-dark: #000000;
+            --bg-secondary-dark: #0A0A0A;
+            --bg-tertiary-dark: #111111;
+            --color-primary-dark: #FFFFFF;
+            --color-secondary-dark: #CCCCCC;
+            --bg-overlay-dark: rgba(0, 0, 0, 0.8);
+            --bg-glass-dark: rgba(0, 0, 0, 0.1);
+
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing (Nothing OS grid system) */
+            --space-unit: 8px;
+            --space-xs: calc(var(--space-unit) * 1);
+            --space-sm: calc(var(--space-unit) * 2);
+            --space-md: calc(var(--space-unit) * 3);
+            --space-lg: calc(var(--space-unit) * 4);
+            --space-xl: calc(var(--space-unit) * 6);
+            --space-2xl: calc(var(--space-unit) * 8);
+            --space-3xl: calc(var(--space-unit) * 12);
+            --space-4xl: calc(var(--space-unit) * 16);
+
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 50%;
+
+            /* Animations */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+            /* Glass morphism */
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+            /* Dot matrix pattern */
+            --dot-size: 2px;
+            --dot-spacing: 20px;
+            --dot-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --bg-tertiary: var(--bg-tertiary-dark);
+            --color-primary: var(--color-primary-dark);
+            --color-secondary: var(--color-secondary-dark);
+            --bg-overlay: var(--bg-overlay-dark);
+            --bg-glass: var(--bg-glass-dark);
+            --dot-color: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(0, 0, 0, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-primary);
+            background: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* ===== DOT MATRIX BACKGROUND ===== */
+        .dot-matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: var(--z-background);
+            background-image:
+                radial-gradient(circle at var(--dot-size), var(--dot-color) var(--dot-size), transparent var(--dot-size));
+            background-size: var(--dot-spacing) var(--dot-spacing);
+            animation: dotShift 20s linear infinite;
+        }
+
+        @keyframes dotShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(var(--dot-spacing), var(--dot-spacing)); }
+        }
+
+        /* ===== GLASS MORPHISM COMPONENTS ===== */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* ===== FIXED NAVBAR STYLES ===== */
+        .navbar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-sticky) !important;
+            padding: var(--space-md) var(--space-xl);
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 70px; /* Reduced height */
+            display: flex;
+            align-items: center;
+            isolation: isolate;
+            will-change: background-color, backdrop-filter;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(0, 0, 0, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98) !important;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.98) !important;
+            box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-brand {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--space-xl); /* Reduced gap for better spacing */
+            align-items: center;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-primary);
+            background: var(--bg-secondary);
+        }
+
+        /* FIXED: Centered dot positioning for all nav items */
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: var(--radius-full);
+        }
+
+        .theme-toggle {
+            width: 48px;
+            height: 28px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: var(--color-primary);
+            border-radius: var(--radius-full);
+            transition: var(--transition-bounce);
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            transform: translateX(20px);
+        }
+
+        /* ===== MAIN CONTENT SPACING FIXES ===== */
+        .main-content {
+            padding-top: 70px; /* Reduced to match navbar height */
+        }
+
+        /* ===== HERO SECTION WITH REDUCED SPACING ===== */
+        .hero {
+            min-height: calc(100vh - 70px); /* Reduced to match navbar */
+            display: flex;
+            align-items: center;
+            padding: var(--space-lg) var(--space-xl); /* Reduced top padding */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, transparent 0%, var(--color-accent) 0.1%, transparent 0.2%),
+                linear-gradient(45deg, transparent 0%, var(--color-success) 0.1%, transparent 0.2%);
+            opacity: 0.1;
+            animation: gradientShift 15s ease infinite;
+            z-index: var(--z-background);
+            will-change: transform;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(100px, -50px) rotate(120deg); }
+            66% { transform: translate(-50px, 100px) rotate(240deg); }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: var(--space-4xl);
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 100%;
+            overflow: visible; /* Changed from hidden to visible */
+        }
+
+        /* FIXED: Name display with proper text rendering */
+        .hero-title {
+            font-size: clamp(1.8rem, 4.5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--space-lg);
+            /* Removed gradient text that was causing issues */
+            color: var(--color-primary) !important;
+            letter-spacing: -1px;
+            /* Removed white-space: nowrap to allow wrapping */
+            display: block;
+            width: 100%;
+            word-wrap: break-word;
+            -webkit-text-fill-color: initial; /* Reset webkit fill */
+            background: none; /* Remove background gradient */
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-secondary);
+            margin-bottom: var(--space-2xl);
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .hero-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            position: relative;
+            overflow: hidden;
+            z-index: var(--z-content);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+        }
+
+        /* ===== PROFILE IMAGE STYLES ===== */
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--bg-primary);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+        }
+
+        .profile-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Dark mode adjustments */
+        [data-theme="dark"] .profile-image {
+            border-color: var(--bg-secondary);
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fallback for when image doesn't load */
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-success) 100%);
+            z-index: -1;
+        }
+
+        /* ===== NOTHING OS BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+            z-index: var(--z-content);
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(255, 107, 53, 0.39);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px 0 rgba(255, 107, 53, 0.5);
+            z-index: var(--z-elevated);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--color-primary);
+            border: 1px solid var(--bg-tertiary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-2px);
+            z-index: var(--z-elevated);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-secondary);
+            border: 1px solid var(--color-tertiary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-secondary);
+            color: var(--color-primary);
+            border-color: var(--color-secondary);
+        }
+
+        /* ===== SECTION LAYOUTS ===== */
+        .section {
+            min-height: calc(100vh - 70px); /* Adjusted for new navbar height */
+            padding: var(--space-2xl) var(--space-xl); /* Reduced padding */
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-4xl);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--color-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--color-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== CARDS (Nothing OS Style) ===== */
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            border: 1px solid var(--bg-tertiary);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--color-accent);
+            z-index: var(--z-elevated);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-success));
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-4xl);
+            align-items: start;
+        }
+
+        .about-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-secondary);
+        }
+
+        .about-content p {
+            margin-bottom: var(--space-lg);
+        }
+
+        .about-stats {
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            display: block;
+            font-family: var(--font-mono);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--color-secondary);
+            margin-top: var(--space-sm);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-4xl);
+        }
+
+        .contact-info {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--color-primary);
+        }
+
+        .contact-details a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* ===== PAGE TRANSITION OVERLAY ===== */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: var(--z-modal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .transition-loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--bg-tertiary);
+            border-top: 3px solid var(--color-accent);
+            border-radius: var(--radius-full);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: var(--space-md); /* Reduced gap on mobile */
+            }
+
+            .navbar {
+                padding: var(--space-sm) var(--space-lg);
+                height: 60px; /* Smaller height on mobile */
+            }
+
+            .main-content {
+                padding-top: 60px; /* Match mobile navbar height */
+            }
+
+            .hero {
+                min-height: calc(100vh - 60px);
+                padding: var(--space-lg) var(--space-lg);
+            }
+
+            .section {
+                min-height: calc(100vh - 60px);
+                padding: var(--space-lg) var(--space-lg);
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            /* FIXED: Better mobile title sizing */
+            .hero-title {
+                font-size: clamp(1.4rem, 6vw, 2.8rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                gap: var(--space-sm);
+            }
+
+            .hero-title {
+                font-size: clamp(1.2rem, 7vw, 2.2rem);
+                line-height: 1.2;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-in:nth-child(1) { animation-delay: 0ms; }
+        .animate-in:nth-child(2) { animation-delay: 100ms; }
+        .animate-in:nth-child(3) { animation-delay: 200ms; }
+        .animate-in:nth-child(4) { animation-delay: 300ms; }
+
+        /* Hide all sections initially except home */
+        .section:not(.active) {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Performance optimizations */
+        .hero::before,
+        .dot-matrix,
+        .card,
+        .btn {
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .navbar.scrolled,
+        .page-transition.active,
+        .card:hover,
+        .btn:hover {
+            will-change: transform, opacity;
+        }
+
+        /* Browser-specific fixes */
+        @supports (-webkit-backdrop-filter: blur(20px)) {
+            .glass,
+            .profile-card,
+            .navbar.scrolled {
+                -webkit-backdrop-filter: blur(20px);
+            }
+        }
+
+        /* ===== PUBLICATION MODALS ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-modal);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--color-secondary);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--color-error);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            color: var(--color-secondary);
+            line-height: 1.6;
+        }
+
+        .doi-content {
+            background: var(--bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            word-break: break-all;
+            margin-bottom: var(--space-lg);
+        }
+
+        .bibtex-content {
+            background: var(--bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .copy-button:hover {
+            background: var(--color-success);
+            transform: translateY(-2px);
+        }
+
+        .copy-button.copied {
+            background: var(--color-success);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dot Matrix Background -->
+    <div class="dot-matrix"></div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition">
+        <div class="transition-loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#teaching" class="nav-link" data-page="teaching">Teaching</a></li>
+                <li><a href="#research" class="nav-link" data-page="research">Research</a></li>
+                <li><a href="#publications" class="nav-link" data-page="publications">Publications</a></li>
+                <li><a href="#students" class="nav-link" data-page="students">Students</a></li>
+<!--                <li><a href="#news" class="nav-link" data-page="news">News</a></li>-->
+                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle" id="themeToggle" title="Toggle dark mode"></div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main id="mainContent" class="main-content">
+
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-title-container">
+                            <h1 class="hero-title">Dr. Sarangthem Ibotombi Singh</h1>
+                        </div>
+                        <p class="hero-subtitle">Assistant Professor</p>
+                        <p class="hero-description">
+                            Department of Computer Science & Engineering at Tezpur University.
+                            Pioneering research in Trust & Reputation Systems, Data Mining, and Web Services
+                            with a focus on real-world applications and innovative solutions.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#research" class="btn btn-primary" data-page="research">
+                                <span>Explore Research</span>
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                    <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                                </svg>
+                            </a>
+                            <a href="./assets/documents/sis_cv.pdf" class="btn btn-secondary" download>
+                                <span>Download CV</span>
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                </svg>
+                            </a>
+                            <a href="#contact" class="btn btn-ghost" data-page="contact">
+                                <span>Get in Touch</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-profile">
+                        <div class="profile-card">
+                            <div class="profile-image">
+                                <img src="./assets/images/sis.jpg"
+                                     alt="Dr. S.I. Singh"
+                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-xl);">
+                            </div>
+                            <div class="profile-info">
+                                <div style="font-size: 1.25rem; font-weight: 600; color: var(--color-primary); margin-bottom: 8px;">Professor</div>
+                                <div style="color: var(--color-secondary); margin-bottom: 4px;">Computer Science & Engineering</div>
+                                <div style="color: var(--color-tertiary); font-size: 0.875rem;">Tezpur University</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title">About</h2>
+                    <p class="section-description">
+                        Dedicated to advancing computer science education and research with a passion for
+                        innovative solutions and academic excellence.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-content">
+                        <p>
+                            I am currently serving as an Assistant Professor in the Department of Computer Science & Engineering
+                            at Tezpur University, where I have the privilege of teaching and mentoring students across multiple programs
+                            including Master of Computer Applications (MCA), Master of Technology (M.Tech, Information Technology),
+                            and Bachelor of Technology (B.Tech CSE).
+                        </p>
+                        <p>
+                            I am currently serving as an Assistant Professor with over 30 years of teaching experience in the Department of
+                            Computer Science & Engineering at Tezpur University, Assam, India, where I have dedicated my academic career to
+                            advancing knowledge in trust models, software engineering, and machine learning applications. My research explores
+                            innovative approaches in trust and reputation mechanisms using advanced techniques like Markov models and Gaussian
+                            processes, while my recent work has expanded into the evolving landscape of software documentation, release management,
+                            and SaaS technologies.
+                        </p>
+                        <p>
+                            I have also contributed to machine learning applications for performance prediction, while
+                            actively serving on program committees for numerous national workshops and conferences including the North-East
+                            ISI-TU Spring School on Algorithms and various workshops on network security, malware threats, and machine intelligence
+                            sponsored by DIT, UGC, and CSIR, and I remain committed to bridging theoretical research with practical applications as
+                            I continue to explore how dynamic technologies shape software development practices and contribute to innovative solutions
+                            in the ever-evolving field of computer science.
+                        </p>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <span class="stat-number">25+</span>
+                            <div class="stat-label">Publications</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">15+</span>
+                            <div class="stat-label">Students Mentored</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">30+</span>
+                            <div class="stat-label">Teaching Experience</div>
+                        </div>
+<!--                        <div class="stat-card">-->
+<!--                            <span class="stat-number">5+</span>-->
+<!--                            <div class="stat-label">Research Projects</div>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section (Always visible on home) -->
+            <div class="section-container" style="margin-top: 80px;">
+                <div class="section-header">
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-description">
+                        Get in touch for collaborations, research opportunities, or academic inquiries.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 32px; color: var(--color-primary);">Get in Touch</h3>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <a href="mailto:sis@tezu.ernet.in">sis@tezu.ernet.in</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>Office</h4>
+                                <p style="color: var(--color-secondary); line-height: 1.6;">
+                                    Department of Computer Science & Engineering<br>
+                                    Tezpur University<br>
+                                    Napaam - 784 028, Tezpur<br>
+                                    Assam, INDIA
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p style="color: var(--color-secondary);">+91-3712-275106 (Office)</p>
+                                <p style="color: var(--color-secondary);">+91-3712-273464 (Residence)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 32px; color: var(--color-primary);">Office Hours</h3>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h4>Regular Hours</h4>
+                                <p style="color: var(--color-secondary); line-height: 1.6;">
+                                    Monday - Friday: 10:00 AM - 5:00 PM<br>
+                                    <em>Please email to schedule an appointment</em>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">👥</div>
+                            <div class="contact-details">
+                                <h4>Student Hours</h4>
+                                <p style="color: var(--color-secondary); line-height: 1.6;">
+                                    Tuesday & Thursday: 2:00 PM - 4:00 PM<br>
+                                    <em>Drop-in hours for current students</em>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🔬</div>
+                            <div class="contact-details">
+                                <h4>Research Meetings</h4>
+                                <p style="color: var(--color-secondary); line-height: 1.6;">
+                                    By appointment<br>
+                                    <a href="mailto:sis@tezu.ernet.in">Email for scheduling</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placeholder sections for other pages (will be loaded dynamically) -->
+        <section id="teaching" class="section"></section>
+        <section id="research" class="section"></section>
+        <section id="publications" class="section"></section>
+        <section id="students" class="section"></section>
+<!--        <section id="news" class="section"></section>-->
+        <section id="contact" class="section"></section>
+    </main>
+
+    <script src="./js/app.js"></script>
+
+    <!-- Initialize the application -->
+    <script>
+        // Ensure the app initializes after DOM is fully loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('🎯 DOM fully loaded, checking initialization...');
+                if (!window.academicSite) {
+                    console.log('🚀 Manually initializing academic site...');
+                    window.academicSite = new NothingOSAcademicSite();
+                }
+            });
+        } else {
+            // DOM already loaded
+            if (!window.academicSite) {
+                console.log('🚀 Initializing academic site immediately...');
+                window.academicSite = new NothingOSAcademicSite();
+            }
+        }
+
+        // Debug: Add click listener to verify navigation is working
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.nav-link, [data-page]')) {
+                console.log('🔗 Navigation clicked:', e.target.getAttribute('data-page') || e.target.getAttribute('href'));
+            }
+        });
+
+        // Debug: Monitor page changes
+        window.addEventListener('hashchange', function() {
+            console.log('🔄 Hash changed to:', window.location.hash);
+        });
+    </script>
+</body>
+</html>
