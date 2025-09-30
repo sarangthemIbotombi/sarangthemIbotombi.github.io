@@ -804,6 +804,133 @@
                 -webkit-backdrop-filter: blur(20px);
             }
         }
+
+        /* ===== PUBLICATION MODALS ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-modal);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--bg-tertiary);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--color-secondary);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--color-error);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            color: var(--color-secondary);
+            line-height: 1.6;
+        }
+
+        .doi-content {
+            background: var(--bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            word-break: break-all;
+            margin-bottom: var(--space-lg);
+        }
+
+        .bibtex-content {
+            background: var(--bg-secondary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+
+        .copy-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .copy-button:hover {
+            background: var(--color-success);
+            transform: translateY(-2px);
+        }
+
+        .copy-button.copied {
+            background: var(--color-success);
+        }
     </style>
 </head>
 
@@ -825,7 +952,7 @@
                 <li><a href="#research" class="nav-link" data-page="research">Research</a></li>
                 <li><a href="#publications" class="nav-link" data-page="publications">Publications</a></li>
                 <li><a href="#students" class="nav-link" data-page="students">Students</a></li>
-                <li><a href="#news" class="nav-link" data-page="news">News</a></li>
+<!--                <li><a href="#news" class="nav-link" data-page="news">News</a></li>-->
                 <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
             </ul>
 
@@ -859,7 +986,7 @@
                                     <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
                                 </svg>
                             </a>
-                            <a href="/assets/documents/SRS_Document__Git_Development_Workflow_physionet_data_eicu_crd.pdf" class="btn btn-secondary" download>
+                            <a href="/assets/documents/sis_cv.pdf" class="btn btn-secondary" download>
                                 <span>Download CV</span>
                                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                     <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
@@ -874,7 +1001,7 @@
                     <div class="hero-profile">
                         <div class="profile-card">
                             <div class="profile-image">
-                                <img src="/assets/images/images.jpg"
+                                <img src="/assets/images/sis.jpg"
                                      alt="Dr. S.I. Singh"
                                      style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-xl);">
                             </div>
@@ -907,13 +1034,20 @@
                             and Bachelor of Technology (B.Tech CSE).
                         </p>
                         <p>
-                            My academic journey has been driven by a deep fascination with the intersection of trust systems,
-                            data mining, and web technologies. I believe in the power of research to solve real-world problems
-                            and am committed to fostering the next generation of computer scientists and engineers.
+                            I am currently serving as an Assistant Professor with over 30 years of teaching experience in the Department of
+                            Computer Science & Engineering at Tezpur University, Assam, India, where I have dedicated my academic career to
+                            advancing knowledge in trust models, software engineering, and machine learning applications. My research explores
+                            innovative approaches in trust and reputation mechanisms using advanced techniques like Markov models and Gaussian
+                            processes, while my recent work has expanded into the evolving landscape of software documentation, release management,
+                            and SaaS technologies.
                         </p>
                         <p>
-                            Beyond academics, I am passionate about sports, reading, and adventure activities, which help me
-                            maintain a balanced perspective and bring fresh energy to my research and teaching endeavors.
+                            I have also contributed to machine learning applications for performance prediction, while
+                            actively serving on program committees for numerous national workshops and conferences including the North-East
+                            ISI-TU Spring School on Algorithms and various workshops on network security, malware threats, and machine intelligence
+                            sponsored by DIT, UGC, and CSIR, and I remain committed to bridging theoretical research with practical applications as
+                            I continue to explore how dynamic technologies shape software development practices and contribute to innovative solutions
+                            in the ever-evolving field of computer science.
                         </p>
                     </div>
 
@@ -927,13 +1061,13 @@
                             <div class="stat-label">Students Mentored</div>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">8+</span>
-                            <div class="stat-label">Years Experience</div>
+                            <span class="stat-number">30+</span>
+                            <div class="stat-label">Teaching Experience</div>
                         </div>
-                        <div class="stat-card">
-                            <span class="stat-number">5+</span>
-                            <div class="stat-label">Research Projects</div>
-                        </div>
+<!--                        <div class="stat-card">-->
+<!--                            <span class="stat-number">5+</span>-->
+<!--                            <div class="stat-label">Research Projects</div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -976,7 +1110,8 @@
                             <div class="contact-icon">📞</div>
                             <div class="contact-details">
                                 <h4>Phone</h4>
-                                <p style="color: var(--color-secondary);">+91-3712-267001 (Office)</p>
+                                <p style="color: var(--color-secondary);">+91-3712-275106 (Office)</p>
+                                <p style="color: var(--color-secondary);">+91-3712-273464 (Residence)</p>
                             </div>
                         </div>
                     </div>
@@ -1026,7 +1161,7 @@
         <section id="research" class="section"></section>
         <section id="publications" class="section"></section>
         <section id="students" class="section"></section>
-        <section id="news" class="section"></section>
+<!--        <section id="news" class="section"></section>-->
         <section id="contact" class="section"></section>
     </main>
 
