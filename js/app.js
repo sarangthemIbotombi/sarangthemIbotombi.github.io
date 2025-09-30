@@ -502,7 +502,7 @@ class NothingOSAcademicSite {
             {
                 name: "Yarin Vashum",
                 initials: "YV",
-                image: "/assets/images/students/yarin.jpg", // Update with actual path
+                image: "./assets/images/students/yarin.jpg", // Update with actual path
                 degree: "Ph.D. in Computer Science & Engineering",
                 thesis: null,
                 period: "2024-Present",
